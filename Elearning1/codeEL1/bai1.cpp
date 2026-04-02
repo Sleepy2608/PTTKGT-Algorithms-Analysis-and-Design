@@ -1,3 +1,5 @@
+//Bài 1: Viết chương trình sử dụng đệ quy chuyển đổi 1 số từ hệ thập phân sang hệ nhị phân.
+
 #include <iostream>
 using namespace std;
 
