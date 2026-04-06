@@ -10,3 +10,8 @@ Thông tin dự án:
   - Hệ thống sử dụng bản đồ leaflet ở Việt nam, tại quận Bình Thạnh
 
 Cách chạy chương trình: (TBC)
+
+# Known Bugs:
+- Lỗi hàm solve khiến không thể tối ưu hóa đường đi
+- Đường đi bị đè, chưa hiện rõ
+- Tính toán thời gian còn sai số nhiều giữa các điểm khi di chuyển
