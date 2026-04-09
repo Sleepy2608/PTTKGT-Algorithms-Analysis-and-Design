@@ -1,4 +1,4 @@
-const N = 51;
+const N = 31;
 let grid = [];
 let start = {x:0, y:0};
 let end = {x:N-1, y:N-1};
