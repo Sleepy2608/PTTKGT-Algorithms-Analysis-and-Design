@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giải mê cung</title>
+    <link rel="stylesheet" href="stylemaze.css">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<br> <br>
+<div class="top-controls">
+
+    <div class="controls-box">
+        <h2>Thuật toán</h2>
+        <button onclick="generateMaze()">Tạo mê cung</button>
+        <button onclick="solveMazeLocal('bfs')">BFS</button>
+        <button onclick="solveMazeLocal('dfs')">DFS</button>
+        <button onclick="solveMazeLocal('astar')">A*</button>
+    </div>
+    
+    <div class="controls-box">
+        <h2>Độ khó</h2>
+        <button onclick="generateMaze('easy')">Dễ</button>
+        <button onclick="generateMaze('medium')">Trung bình</button>
+        <button onclick="generateMaze('hard')">Khó</button>
+    </div>
+
+</div>
+
+<div class="canvas-container">
+    <canvas id="mazeCanvas" width="600" height="600"></canvas>
+</div>
+
+<script src="maze.js"></script>
+
+</body>
+</html>
