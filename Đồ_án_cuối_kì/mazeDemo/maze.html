@@ -32,10 +32,21 @@
         <button onclick="generateMaze('hard')">Khó</button>
     </div>
 
+    <div class="controls-box">
+        <h2>Giao hàng</h2>
+        <button onclick="clearCustomers()">Xóa điểm</button>
+        <button onclick="runVRP()">Tối ưu giao hàng</button>
+    </div> 
+
 </div>
 
 <div class="canvas-container">
     <canvas id="mazeCanvas" width="600" height="600"></canvas>
+</div>
+
+<div id="resultBox" style="margin-top:20px; text-align:left; width:600px; margin:auto;">
+    <h3>Kết quả phân tuyến:</h3>
+    <div id="result"></div>
 </div>
 
 <script src="maze.js"></script>
