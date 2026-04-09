@@ -5,13 +5,13 @@ Thông tin dự án:
   - Ngôn ngữ
     - Ngôn ngữ chính: C++
     - Các ngôn ngữ khác: JavaScript, HTML, CSS
+  - Dùng mê cung để diễn tả thành đường đi giao hàng rồi từ đó phát triển lên thành bản đồ thực tế
   - Hệ thống chạy bằng server local host
-  - Hệ thống sử dụng thuật toán DFS và Branch & Bound
-  - Hệ thống sử dụng bản đồ leaflet ở Việt nam, tại quận Bình Thạnh
+  - Hệ thống sử dụng thuật toán A*, Branch & Bound và Clarke-Wright Savings Algorithm để tối ưu hóa đường đi
 
 Cách chạy chương trình: (TBC)
 
-# Known Bugs:
+# Known Bugs: (Cho map)
 - Lỗi hàm solve khiến không thể tối ưu hóa đường đi
 - Đường đi bị đè, chưa hiện rõ
 - Tính toán thời gian còn sai số nhiều giữa các điểm khi di chuyển
