@@ -2,43 +2,27 @@
 #include <iostream>
 using namespace std;
 
-// Constructor
 Vehicle::Vehicle(int id, int capacity) {
     this->id = id;
     this->capacity = capacity;
-    this->currentLoad = 0;
 }
 
-// Getter
 int Vehicle::getId() const { return id; }
 int Vehicle::getCapacity() const { return capacity; }
-int Vehicle::getCurrentLoad() const { return currentLoad; }
-vector<int> Vehicle::getRoute() const { return route; }
 
-// Check capacity
-bool Vehicle::canAdd(int demand) const {
-    return currentLoad + demand <= capacity;
+const Route& Vehicle::getRoute() const {
+    return route;
 }
 
-// Add customer
-void Vehicle::addCustomer(int customerId, int demand) {
-    route.push_back(customerId);
-    currentLoad += demand;
+bool Vehicle::canAssign(const Route& r) const {
+    return r.getLoad() <= capacity;
 }
 
-// Set route (sau khi merge)
-void Vehicle::setRoute(const vector<int>& newRoute, int load) {
-    route = newRoute;
-    currentLoad = load;
+void Vehicle::setRoute(const Route& r) {
+    route = r;
 }
 
-// // Debug
-// void Vehicle::print() const {
-//     cout << "Vehicle " << id << ": ";
-//     cout << "Load = " << currentLoad << "/" << capacity << " | Route: ";
-
-//     for (int x : route) {
-//         cout << x << " ";
-//     }
-//     cout << endl;
-// }
+void Vehicle::print() const {
+    cout << "Vehicle " << id << ": ";
+    route.print();
+}

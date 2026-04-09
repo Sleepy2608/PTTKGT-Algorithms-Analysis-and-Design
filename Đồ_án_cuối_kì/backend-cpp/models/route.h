@@ -2,38 +2,38 @@
 #define ROUTE_H
 
 #include <vector>
-using namespace std;
+#include "Customer.h"
 
 class Route {
 private:
-    vector<int> customers; // danh sách customer id (KHÔNG chứa depot)
-    int load;              // tổng demand <= capacity của xe
+    std::vector<Customer> customers; // danh sách Customer (không chứa depot)
+    int load;                        // tổng demand
 
 public:
     // Constructor
     Route();
 
     // Getter
-    vector<int> getCustomers() const;
+    const std::vector<Customer>& getCustomers() const;
     int getLoad() const;
 
-    // Thêm customer (cuối route)
-    void addCustomer(int customerId, int demand);
+    // Thêm customer
+    void addCustomer(const Customer& customer);
 
-    // Kiểm tra vị trí đầu/cuối
-    int getFirst() const;
-    int getLast() const;
+    // Lấy customer đầu/cuối
+    const Customer* getFirst() const;
+    const Customer* getLast() const;
 
     // Kiểm tra rỗng
     bool isEmpty() const;
 
-    // Merge 2 route (A + B)
+    // Merge route
     void mergeWith(const Route& other);
 
-    // Set route (dùng khi cần override)
-    void setCustomers(const vector<int>& newCustomers, int newLoad);
+    // Set lại route
+    void setCustomers(const std::vector<Customer>& newCustomers);
 
-    //  Debug
+    // Debug
     void print() const;
 };
 

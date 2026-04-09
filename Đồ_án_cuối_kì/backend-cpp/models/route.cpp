@@ -1,14 +1,11 @@
 #include "Route.h"
 #include <iostream>
-using namespace std;
 
-// Constructor
 Route::Route() {
     load = 0;
 }
 
-// Getter
-vector<int> Route::getCustomers() const {
+const std::vector<Customer>& Route::getCustomers() const {
     return customers;
 }
 
@@ -16,48 +13,46 @@ int Route::getLoad() const {
     return load;
 }
 
-// Add customer vào cuối
-void Route::addCustomer(int customerId, int demand) {
-    customers.push_back(customerId);
-    load += demand;
+void Route::addCustomer(const Customer& customer) {
+    customers.push_back(customer);
+    load += customer.getDemand();
 }
 
-// Lấy phần tử đầu
-int Route::getFirst() const {
-    if (customers.empty()) return -1;
-    return customers.front();
+const Customer* Route::getFirst() const {
+    if (customers.empty()) return nullptr;
+    return &customers.front();
 }
 
-// Lấy phần tử cuối
-int Route::getLast() const {
-    if (customers.empty()) return -1;
-    return customers.back();
+const Customer* Route::getLast() const {
+    if (customers.empty()) return nullptr;
+    return &customers.back();
 }
 
-// Check empty
 bool Route::isEmpty() const {
     return customers.empty();
 }
 
-// Merge route: this = this + other
 void Route::mergeWith(const Route& other) {
-    for (int x : other.customers) {
-        customers.push_back(x);
+    for (const Customer& c : other.getCustomers()) {
+        customers.push_back(c);
     }
-    load += other.load;
+    load += other.getLoad();
 }
 
-// Set lại route
-void Route::setCustomers(const vector<int>& newCustomers, int newLoad) {
+void Route::setCustomers(const std::vector<Customer>& newCustomers) {
     customers = newCustomers;
-    load = newLoad;
+
+    // tính lại load
+    load = 0;
+    for (const Customer& c : customers) {
+        load += c.getDemand();
+    }
 }
 
-// Debug
 void Route::print() const {
-    cout << "Route: 0 -> ";
-    for (int x : customers) {
-        cout << x << " -> ";
+    std::cout << "Route: 0 -> ";
+    for (const Customer& c : customers) {
+        std::cout << c.getId() << " -> ";
     }
-    cout << "0 | Load = " << load << endl;
+    std::cout << "0 | Load = " << load << std::endl;
 }
