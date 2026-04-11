@@ -474,9 +474,12 @@ function buildFullPath(route){
     }
 
     //vẽ đường quay về lại kho (0, 0)
-    // let back = bfsPath(prev, start);
-    // back.shift();
-    // fullPath = fullPath.concat(back);
+    let returnToDepot = false; //true = mở quay về, false = tắt quay về
+    if(returnToDepot){
+        let back = bfsPath(prev, start);
+        back.shift();
+        fullPath = fullPath.concat(back);
+    }
 
     return fullPath;
 }
