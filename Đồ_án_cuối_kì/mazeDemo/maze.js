@@ -473,9 +473,10 @@ function buildFullPath(route){
         prev = p;
     }
 
-    let back = bfsPath(prev, start);
-    back.shift();
-    fullPath = fullPath.concat(back);
+    //vẽ đường quay về lại kho (0, 0)
+    // let back = bfsPath(prev, start);
+    // back.shift();
+    // fullPath = fullPath.concat(back);
 
     return fullPath;
 }
