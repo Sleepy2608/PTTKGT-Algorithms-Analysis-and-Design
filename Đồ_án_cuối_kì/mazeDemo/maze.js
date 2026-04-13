@@ -216,8 +216,117 @@ function reconstruct(parent){
     return path.reverse();
 }
 
+// ================= RECONSTRUCT =================
+function reconstruct(parent){
+    let path=[], cur=end;
+    while(cur){ path.push(cur); cur=parent[cur.x][cur.y]; }
+    return path.reverse();
+}
+
 // ================= VRP =================
 function solveVRP(){
+    if(customers.length === 0) return [[end]];
+
+    let n = customers.length;
+
+    // ===== DIST =====
+    let distDepot = customers.map(c => bfsPath(start,c).length);
+
+    let dist = Array.from({length:n},()=>Array(n).fill(0));
+    for(let i=0;i<n;i++){
+        for(let j=0;j<n;j++){
+            if(i!==j){
+                dist[i][j] = bfsPath(customers[i],customers[j]).length;
+            }
+        }
+    }
+
+    // ===== SAVINGS (Clarke-Wright) =====
+    let savings = [];
+    for(let i=0;i<n;i++){
+        for(let j=i+1;j<n;j++){
+            let s = distDepot[i] + distDepot[j] - dist[i][j];
+            savings.push({i,j,s});
+        }
+    }
+
+    savings.sort((a,b)=>b.s-a.s);
+
+    // ===== INIT ROUTES =====
+    let routes = customers.map((c,i)=>[i]);
+
+    function findRoute(x){
+        return routes.find(r=>r.includes(x));
+    }
+
+    // ===== MERGE (Clarke) =====
+    for(let {i,j} of savings){
+        let r1 = findRoute(i);
+        let r2 = findRoute(j);
+
+        if(!r1 || !r2 || r1===r2) continue;
+
+        let canMerge =
+            (r1[r1.length-1]===i && r2[0]===j) ||
+            (r2[r2.length-1]===j && r1[0]===i);
+
+        if(canMerge){
+            let merged;
+
+            if(r1[r1.length-1]===i){
+                merged = r1.concat(r2);
+            } else {
+                merged = r2.concat(r1);
+            }
+
+            routes = routes.filter(r=>r!==r1 && r!==r2);
+            routes.push(merged);
+        }
+    }
+
+    // convert index → point
+    routes = routes.map(r => r.map(i => customers[i]));
+
+    // ===== APPLY RULE CỦA BẠN =====
+    routes = improveRoutes(routes);
+
+    return routes;
+}
+
+
+// special rules
+function improveRoutes(routes){
+    let changed = true;
+
+    while(changed){
+        changed = false;
+
+        for(let i=0;i<routes.length;i++){
+            for(let j=0;j<routes.length;j++){
+                if(i===j) continue;
+
+                let A = routes[i][routes[i].length-1];
+                let B = routes[j][0];
+
+                let dDepotB = bfsPath(start,B).length;
+                let dAtoB   = bfsPath(A,B).length;
+
+                if(dAtoB < dDepotB){
+                    routes[i] = routes[i].concat(routes[j]);
+                    routes.splice(j,1);
+                    changed = true;
+                    break;
+                }
+            }
+            if(changed) break;
+        }
+    }
+
+    return routes;
+}
+
+// greedy
+function solveGreedy(){
     if(customers.length === 0) return [[end]];
 
     let routes = customers.map(c => [c]);
@@ -237,11 +346,10 @@ function solveVRP(){
                 let dDepotB = bfsPath(start,B).length;
                 let dAtoB   = bfsPath(A,B).length;
 
-                // 🔥 CORE LOGIC CỦA BẠN
+                // 🔥 greedy của bạn
                 if(dAtoB < dDepotB){
                     routes[i] = routes[i].concat(routes[j]);
                     routes.splice(j,1);
-
                     changed = true;
                     break;
                 }
@@ -251,6 +359,117 @@ function solveVRP(){
     }
 
     return routes;
+}
+
+async function runGreedy(){
+    allRoutes = [];
+
+    if(customers.length===0){
+        customers=[end];
+    }
+
+    let routes = solveGreedy();
+
+    routes = removeOverlappingRoutes(routes);
+
+    showResult(routes);
+
+    for(let r=0;r<routes.length;r++){
+        allRoutes.push({
+            path: buildFullPath(routes[r]),
+            color: colors[r % colors.length]
+        });
+    }
+
+    await animateAllRoutes();
+}
+
+// Clarke Wright
+function solveClarkeWright(){
+    if(customers.length === 0) return [[end]];
+
+    let n = customers.length;
+
+    let distDepot = customers.map(c => bfsPath(start,c).length);
+
+    let dist = Array.from({length:n},()=>Array(n).fill(0));
+    for(let i=0;i<n;i++){
+        for(let j=0;j<n;j++){
+            if(i!==j){
+                dist[i][j] = bfsPath(customers[i],customers[j]).length;
+            }
+        }
+    }
+
+    let savings = [];
+    for(let i=0;i<n;i++){
+        for(let j=i+1;j<n;j++){
+            let s = distDepot[i] + distDepot[j] - dist[i][j];
+            savings.push({i,j,s});
+        }
+    }
+
+    savings.sort((a,b)=>b.s-a.s);
+
+    let routes = customers.map((c,i)=>[i]);
+
+    function findRoute(x){
+        return routes.find(r=>r.includes(x));
+    }
+
+    for(let {i,j} of savings){
+        let r1 = findRoute(i);
+        let r2 = findRoute(j);
+
+        if(!r1 || !r2 || r1===r2) continue;
+
+        let canMerge =
+            (r1[r1.length-1]===i && r2[0]===j) ||
+            (r2[r2.length-1]===j && r1[0]===i);
+
+        if(canMerge){
+            let merged;
+
+            if(r1[r1.length-1]===i){
+                merged = r1.concat(r2);
+            } else {
+                merged = r2.concat(r1);
+            }
+
+            routes = routes.filter(r=>r!==r1 && r!==r2);
+            routes.push(merged);
+        }
+    }
+
+    return routes.map(r => r.map(i => customers[i]));
+}
+
+async function runClarke(){
+    allRoutes = [];
+
+    if(customers.length===0){
+        customers=[end];
+    }
+
+    let routes = solveClarkeWright();
+    routes.sort((a,b)=>{
+        let lenA = buildFullPath(a).length;
+        let lenB = buildFullPath(b).length;
+        return lenA - lenB;
+    });
+
+    routes = removeOverlappingRoutes(routes);
+
+    showResult(routes);
+
+    for(let r=0;r<routes.length;r++){
+        allRoutes.push({
+            path: buildFullPath(routes[r]),
+            color: colors[r % colors.length]
+        });
+    }
+
+    await animateAllRoutes();
 }
 
 // ================= RUN VRP =================
@@ -283,35 +502,34 @@ async function runVRP(){
 function drawAllRoutes(step){
     const s = canvas.width / N;
 
-    // ⚠️ chỉ vẽ nền 1 lần mỗi frame
-    draw();
+    draw(); // nền
 
     allRoutes.forEach(({path, color}) => {
+        if(path.length === 0) return;
+
         ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
+
         ctx.beginPath();
 
-        for(let i=0;i<path.length;i++){
-            if(i > step) break;
+        let first = path[0];
+        ctx.moveTo(first.y*s + s/2, first.x*s + s/2);
 
+        for(let i=1;i<=step && i<path.length;i++){
             let p = path[i];
-            let x = p.y*s + s/2;
-            let y = p.x*s + s/2;
-
-            if(i === 0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
+            ctx.lineTo(p.y*s + s/2, p.x*s + s/2);
         }
 
-        ctx.stroke(); // 👉 vẽ full path tới step
+        ctx.stroke();
     });
 }
 
 async function animateAllRoutes(){
     let maxLen = Math.max(...allRoutes.map(r => r.path.length));
 
-    for(let step=0;step<maxLen;step++){
+    for(let step=1;step<=maxLen;step++){
         drawAllRoutes(step);
         await sleep(25);
     }
@@ -321,26 +539,24 @@ function removeOverlappingRoutes(routes){
     let finalRoutes = [];
 
     for(let i=0;i<routes.length;i++){
-        let keep = true;
+        let pathI = buildFullPath(routes[i]);
+
+        let dominated = false;
 
         for(let j=0;j<routes.length;j++){
             if(i===j) continue;
 
-            let pathI = buildFullPath(routes[i]);
             let pathJ = buildFullPath(routes[j]);
 
             let setJ = new Set(pathJ.map(p=>p.x+"-"+p.y));
 
-            // nếu path I bị path J cover
-            let covered = pathI.every(p => setJ.has(p.x+"-"+p.y));
-
-            if(covered){
-                keep = false;
+            if(pathI.every(p => setJ.has(p.x+"-"+p.y))){
+                dominated = true;
                 break;
             }
         }
 
-        if(keep) finalRoutes.push(routes[i]);
+        if(!dominated) finalRoutes.push(routes[i]);
     }
 
     return finalRoutes;
@@ -389,7 +605,7 @@ async function solveMazeLocal(type){
 async function animate(path, color="red"){
     const s = canvas.width/N;
 
-    // 👉 vẽ nền 1 lần
+    // vẽ nền 1 lần
     draw();
 
     ctx.strokeStyle = color;
@@ -453,11 +669,11 @@ function showResult(routes){
             text += ` → Điểm ${index+1}`;
         });
 
-        let p = document.createElement("p");
-        p.textContent = text;
-        p.style.color = colors[idx % colors.length];
+        let el = document.createElement("p");
+        el.textContent = text;
+        el.style.color = colors[idx % colors.length];
 
-        resultDiv.appendChild(p);
+        resultDiv.appendChild(el);
     });
 }
 
@@ -473,14 +689,7 @@ function buildFullPath(route){
         prev = p;
     }
 
-    //vẽ đường quay về lại kho (0, 0)
-    let returnToDepot = false; //true = mở quay về, false = tắt quay về
-    if(returnToDepot){
-        let back = bfsPath(prev, start);
-        back.shift();
-        fullPath = fullPath.concat(back);
-    }
-
+    // KHÔNG quay về kho
     return fullPath;
 }
 
