@@ -18,20 +18,18 @@ pair<int,int> endP = {N-2,N-2};
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 // ================= GEN MAZE DFS =================
-int dx4[4] = {2,-2,0,0};
-int dy4[4] = {0,0,2,-2};
-
 void carve(int x,int y){
-    vector<int> dirs = {0,1,2,3};
+    vector<pair<int,int>> dirs = { {2,0}, {-2,0}, {0,2}, {0,-2} };
+
     shuffle(dirs.begin(), dirs.end(), rng);
 
-    for(int i:dirs){
-        int nx = x + dx4[i];
-        int ny = y + dy4[i];
+    for(auto [dx,dy] : dirs){
+        int nx = x + dx;
+        int ny = y + dy;
 
         if(nx>0 && ny>0 && nx<N-1 && ny<N-1 && grid[nx][ny]){
             grid[nx][ny] = 0;
-            grid[x + dx4[i]/2][y + dy4[i]/2] = 0;
+            grid[x + dx/2][y + dy/2] = 0;
             carve(nx,ny);
         }
     }
