@@ -17,7 +17,7 @@ pair<int,int> endP = {N-2,N-2};
 // ================= RANDOM =================
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-// ================= MAZE DFS =================
+// ================= GEN MAZE DFS =================
 int dx4[4] = {2,-2,0,0};
 int dy4[4] = {0,0,2,-2};
 
@@ -185,7 +185,6 @@ vector<vector<pair<int,int>>> solveVRP(vector<pair<int,int>> customers){
     return res;
 }
 
-// ================= MAIN =================
 int main(){
     generateMaze();
 
