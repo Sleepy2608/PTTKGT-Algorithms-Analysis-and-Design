@@ -7,7 +7,7 @@ Thông tin dự án:
     - Các ngôn ngữ khác: JavaScript, HTML, CSS
   - Dùng mê cung để diễn tả thành đường đi giao hàng rồi từ đó phát triển lên thành bản đồ thực tế
   - Hệ thống chạy bằng server local host
-  - Hệ thống sử dụng thuật toán A*, Branch & Bound và Clarke-Wright Savings Algorithm để tối ưu hóa đường đi
+  - Hệ thống sử dụng thuật toán DFS, BFS, Greedy (Savings), A* và Clarke-Wright Savings để tối ưu hóa đường đi (Chủ yếu tập trung vào A* và Clarke-Wright)
 
 Cách chạy chương trình: 
 - Down file code về máy
