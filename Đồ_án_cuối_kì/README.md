@@ -15,7 +15,9 @@ Cách chạy chương trình:
   - Vào file server (cd ../server)
   - Chạy lệnh `npm start`. Nếu có:
   > server@1.0.0 start
+  
   > node server.js
+  
   thì đã chạy thành công
 - Vô hmtl chạy local
 
