@@ -9,18 +9,6 @@ Thông tin dự án:
   - Hệ thống chạy bằng server local host
   - Hệ thống sử dụng thuật toán DFS, BFS, Greedy (Savings), A* và Clarke-Wright Savings để tối ưu hóa đường đi (Chủ yếu tập trung vào A* và Clarke-Wright)
 
-Cách chạy chương trình: 
-- Down file code về máy
-- Check gitbash trước khi chạy server
-  - Vào file server (cd ../server)
-  - Chạy lệnh `npm start`. Nếu có:
-  > server@1.0.0 start
-  
-  > node server.js
-  
-  thì đã chạy thành công
-- Vô hmtl chạy local
-
 # Known Bugs: (Cho map)
 - Lỗi hàm solve khiến không thể tối ưu hóa đường đi
 - Đường đi bị đè, chưa hiện rõ
