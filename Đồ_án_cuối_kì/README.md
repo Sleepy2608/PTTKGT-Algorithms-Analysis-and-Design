@@ -16,7 +16,7 @@ Các file chính liên quan đến đồ án cuối kì:
   - customer.cpp, customer.h, route.cpp, route.h
 - File kết quả ở results
 
-# Known Bugs: (Cho map)
-- Lỗi hàm solve khiến không thể tối ưu hóa đường đi
-- Đường đi bị đè, chưa hiện rõ
-- Tính toán thời gian còn sai số nhiều giữa các điểm khi di chuyển
+Tài liệu tham khảo:
+1. A* algorithm: https://en.wikipedia.org/wiki/A*_search_algorithm
+2. Clarke and Wright Savings Algorithm as Solutions Vehicle Routing Problem with Simultaneous Pickup Delivery (VRPSPD): https://iopscience.iop.org/article/10.1088/1742-6596/2421/1/012045/pdf
+3. Vehicle routing problem (VRP): https://en.wikipedia.org/wiki/Vehicle_routing_problem
