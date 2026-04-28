@@ -7,7 +7,9 @@
     - Các ngôn ngữ khác: JavaScript, HTML, CSS
   - Dùng mê cung để diễn tả thành đường đi giao hàng rồi từ đó phát triển lên thành bản đồ thực tế
   - Hệ thống chạy bằng server local host
-  - Hệ thống sử dụng thuật toán DFS, BFS, Greedy Best-First Search và A*. Sau đó, ứng dụng thuật toán Clarke-Wright Savings để tối ưu hóa đường đi (Đồ án chủ yếu tập trung vào thuật toán A* và Clarke-Wright)
+  - Hệ thống sử dụng các thuật toán DFS, BFS, Greedy Best-First Search và A* để tìm đường đi. Sau đó, ứng dụng thuật toán Clarke-Wright Savings để tối ưu hóa đường đi
+    - Thuật toán DFS được áp dụng để tạo mê cung
+    - Đồ án chủ yếu tập trung vào thuật toán A* và cách tối ưu đường đi giao hàng thông qua thuật toán Clarke-Wright Savings
 
 **Các file chính liên quan đến đồ án cuối kì:**
 - Các file ở folder mazeDemo
