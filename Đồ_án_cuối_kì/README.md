@@ -18,6 +18,8 @@
   - customer.cpp, customer.h, route.cpp, route.h
 - File kết quả ở results
 
+**Cách chạy chương trình:**
+
 **Tài liệu tham khảo:**
 1. A* algorithm: https://en.wikipedia.org/wiki/A*_search_algorithm
 2. Clarke and Wright Savings Algorithm as Solutions Vehicle Routing Problem with Simultaneous Pickup Delivery (VRPSPD): https://iopscience.iop.org/article/10.1088/1742-6596/2421/1/012045/pdf
