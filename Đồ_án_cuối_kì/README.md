@@ -1,9 +1,6 @@
 # Đồ án cuối kì
----
 **Topic: Xây dựng hệ thống giao hàng shipper**
-
 ---
-
 **Thông tin dự án:**
   - Ngôn ngữ
     - Ngôn ngữ chính: C++
@@ -13,29 +10,26 @@
   - Hệ thống sử dụng các thuật toán DFS, BFS, Greedy Best-First Search và A* để tìm đường đi. Sau đó, ứng dụng thuật toán Clarke-Wright Savings để tối ưu hóa đường đi
     - Thuật toán DFS được áp dụng để tạo mê cung
     - Đồ án chủ yếu tập trung vào thuật toán A* và cách tối ưu đường đi giao hàng thông qua thuật toán Clarke-Wright Savings
-
 ---
-
 **Các file chính liên quan đến đồ án cuối kì:**
 - Các file ở folder mazeDemo
 - Các file ở folder clarkeWrightSavingsAlgorithm
   - Folder algorithms
   - customer.cpp, customer.h, route.cpp, route.h
 - File kết quả ở results
-
 ---
-
 **Các file khác:**
 - Nhóm có dự định phát triển đồ án lên bản đồ thực tế (Google Map) từ mô phỏng mê cung như này nên các file backend-cpp, frontend, data và server là cho phần map của nhóm sau này
 - File results có chứa hình ảnh UI/UX của hệ thống khi nâng cấp lên map
-
 ---
-
 **Cách tải chương trình:**
+1. Git clone chương trình
 
-
+```bash
+git clone https://github.com/Sleepy2608/PTTKGT-Algorithms-Analysis-and-Design.git
+```
+2. Từ trang mục Code ở github chọn: Code -> Download ZIP
 ---
-
 **Cách chạy chương trình:**
 - Mở file `maze.html` và chọn Open with Live Server hoặc với phím tắt Alt+L Alt+O
 - Hoặc chạy dưới frontend:
