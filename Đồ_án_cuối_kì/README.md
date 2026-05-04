@@ -18,6 +18,10 @@
   - customer.cpp, customer.h, route.cpp, route.h
 - File kết quả ở results
 
+**Các file khác:**
+- Nhóm có dự định phát triển đồ án lên bản đồ thực tế (Google Map) từ mô phỏng mê cung như này nên các file backend-cpp, frontend, data và server là cho phần map của nhóm sau này
+- File results có chứa hình ảnh UI/UX của hệ thống khi nâng cấp lên map
+
 **Cách chạy chương trình:**
 
 **Tài liệu tham khảo:**
