@@ -35,7 +35,7 @@ git clone https://github.com/Sleepy2608/PTTKGT-Algorithms-Analysis-and-Design.gi
 - Hoặc chạy dưới frontend:
 
 ```text
-[http://localhost:5173](http://127.0.0.1:5500/frontend/maze.html)
+http://127.0.0.1:5500/frontend/maze.html
 ```
 
 
