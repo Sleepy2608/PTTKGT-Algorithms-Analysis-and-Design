@@ -354,7 +354,7 @@ function solveGreedy(){
     return routes;
 }
 
-async function runGreedy(){
+async function runClarke(){
     allRoutes = [];
 
     if(customers.length===0){
@@ -437,7 +437,7 @@ function solveClarkeWright(){
     return routes.map(r => r.map(i => customers[i]));
 }
 
-async function runClarke(){
+async function runGreedy(){
     allRoutes = [];
 
     if(customers.length===0){
