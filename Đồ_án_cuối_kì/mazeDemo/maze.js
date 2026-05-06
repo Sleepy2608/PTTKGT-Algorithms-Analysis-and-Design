@@ -43,7 +43,7 @@ function generateMaze(diff="medium"){
     grid[1][1]=0;
     carve(1,1);
 
-    let breakChance = diff==="easy"?0.25: diff==="hard"?0.05:0.15;
+    let breakChance = diff==="easy" ? 0.25: diff==="hard" ? 0.05 : 0.15;
 
     for(let i=1;i<N-1;i++)
         for(let j=1;j<N-1;j++)
@@ -207,13 +207,6 @@ async function astarAnimated(){
     }
 
     return reconstruct(par);
-}
-
-// ================= RECONSTRUCT =================
-function reconstruct(parent){
-    let path=[], cur=end;
-    while(cur){ path.push(cur); cur=parent[cur.x][cur.y]; }
-    return path.reverse();
 }
 
 // ================= RECONSTRUCT =================
