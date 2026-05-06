@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "algorithms/ClarkeWright.h"
-#include "models/customer.h"
-#include "models/route.h"
-#include "service/DistanceService.h"
-#include "C:\University Coding Project\Giao hàng shipper - PTTKGT Project\clarkeWrightSavings\algorithms\Astar.cpp"
-
 const int N = 41;
 
 // ================= GRID =================
@@ -17,7 +11,7 @@ pair<int,int> endP = {N-2,N-2};
 // ================= RANDOM =================
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-// ================= GEN MAZE DFS =================
+// ================= MAZE DFS =================
 void carve(int x,int y){
     vector<pair<int,int>> dirs = { {2,0}, {-2,0}, {0,2}, {0,-2} };
 
@@ -183,6 +177,7 @@ vector<vector<pair<int,int>>> solveVRP(vector<pair<int,int>> customers){
     return res;
 }
 
+// ================= MAIN =================
 int main(){
     generateMaze();
 
