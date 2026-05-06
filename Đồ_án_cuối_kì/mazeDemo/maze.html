@@ -23,10 +23,10 @@
         <button onclick="solveMazeLocal('bfs')">BFS</button>
         <button onclick="solveMazeLocal('dfs')">DFS</button>
         <button onclick="solveMazeLocal('astar')">A*</button>
-        <button onclick="runGreedy()">Clarke-Wright</button> <!--nhầm thuật toán nên đổi chỗ ngược lại-->
-        <button onclick="runClarke()">Greedy</button>
+        <button onclick="runGreedy()">Clarke-Wright</button>
+        <button onclick="runClarke()">Greedy First Search</button>
     </div>
-    
+
     <div class="controls-box">
         <h2>Độ khó</h2>
         <button onclick="generateMaze('easy')">Dễ</button>
@@ -39,8 +39,9 @@
         <button onclick="clearCustomers()">Xóa điểm</button>
         <button onclick="runVRP()">Tối ưu giao hàng</button>
     </div> 
-
+    
 </div>
+
 
 <div class="canvas-container">
     <canvas id="mazeCanvas" width="600" height="600"></canvas>
